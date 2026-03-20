@@ -601,12 +601,13 @@ def logs_to_feather(dir_path, feather_dir = 'feather_files'):
                 failed_files_string+=f"{file}\n"
                 continue  # Skip to the next file
 
-            os.chdir('feather_files')
-            
-            string_report+=save_to_feather(df, file.split('.')[0])  # Assuming you want to remove the .log extension
-            os.chdir('..')
+            os.chdir(feather_dir) 
+            string_report += save_to_feather(df, file.split('.')[0])  # Assuming you want to remove the .log extension
+            os.chdir(dir_path)
+
         else:
             continue
+
     if failed_files_string is not None:
         string_report = failed_files_string + 'Check the log files and reported errors for more information.'
         
